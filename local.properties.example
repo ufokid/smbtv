@@ -1,0 +1,8 @@
+# This file is EXAMPLE ONLY - Do NOT commit to git
+# Copy to local.properties and update with your SDK path
+
+# Android SDK location
+sdk.dir=/opt/android-sdk
+
+# Optional: Android NDK location (if using native code)
+# ndk.dir=/path/to/android-ndk

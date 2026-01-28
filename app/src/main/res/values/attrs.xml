@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Leanback Card View Attributes -->
+    <attr name="icon_title_background_color" format="color" />
+    <attr name="icon_detail_background_color" format="color" />
+    <attr name="icon_title_text_color" format="color" />
+    <attr name="icon_detail_text_color" format="color" />
+</resources>

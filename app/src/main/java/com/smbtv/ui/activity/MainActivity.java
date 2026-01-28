@@ -1,36 +1,51 @@
 package com.smbtv.ui.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 
-import com.google.android.gms.common.api.GoogleApiClient;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.smbtv.R;
+import com.smbtv.databinding.ActivitySmbtvBinding;
 
-public class MainActivity extends Activity {
+/**
+ * Main Activity for SMBTV Android TV Application
+ * Updated for modern Android development practices
+ */
+public class MainActivity extends AppCompatActivity {
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    private ActivitySmbtvBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_smbtv);
+        
+        // Initialize View Binding
+        binding = ActivitySmbtvBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        
+        initializeUI();
+    }
+
+    /**
+     * Initialize UI components
+     */
+    private void initializeUI() {
+        // TODO: Initialize your UI components here
     }
 
     @Override
-    public void onStart() {
-
+    protected void onStart() {
         super.onStart();
     }
 
     @Override
-    public void onStop() {
-
+    protected void onStop() {
         super.onStop();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding = null;
+    }
 }

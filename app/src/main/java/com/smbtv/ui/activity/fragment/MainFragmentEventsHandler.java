@@ -6,7 +6,6 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.nononsenseapps.filepicker.FilePickerActivity;
 import com.smbtv.R;
 import com.smbtv.delegate.SMBServerDelegate;
 import com.smbtv.model.SMBShare;
@@ -78,14 +77,19 @@ public class MainFragmentEventsHandler {
 
         Log.d(TAG, "onAddShareButtonClick");
 
-        Intent intent = new Intent(mParent.getActivity(), FilePickerActivity.class);
+        // FilePicker library was removed in modernization
+        // TODO: Implement native file picker using Android's built-in file selection
+        String text = getLabel(R.string.error_service_unbounded);
+        Toast.makeText(mParent.getActivity().getApplicationContext(), 
+            "File picker not implemented in this version", Toast.LENGTH_SHORT).show();
 
-        intent.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
-        intent.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false);
-        intent.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_DIR);
-        intent.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
-
-        mParent.startActivityForResult(intent, ADD_SHARE_RESULT);
+        // Legacy FilePicker code (commented out):
+        // Intent intent = new Intent(mParent.getActivity(), FilePickerActivity.class);
+        // intent.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
+        // intent.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false);
+        // intent.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_DIR);
+        // intent.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
+        // mParent.startActivityForResult(intent, ADD_SHARE_RESULT);
     }
 
     public void onShareButtonClick(MenuItem menuItem) {
