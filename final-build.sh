@@ -3,19 +3,16 @@
 # SMBTV - Build Final com Docker
 # Tudo configurado e pronto
 
-PROJECT_DIR="/workspaces/smbtv"
-cd "$PROJECT_DIR"
+cd "$(dirname "$0")"
 
-echo "╔════════════════════════════════════════════════════════════╗"
-echo "║    SMBTV Build Final - Compilando...                      ║"
-echo "╚════════════════════════════════════════════════════════════╝"
+echo "🔨 Compilando SMBTV..."
 echo ""
 
 docker run --rm \
-    -v "$PROJECT_DIR":/workspace \
+    -v "$(pwd)":/workspace \
     -w /workspace \
     androidsdk/android-30 \
-    ./gradlew clean assembleDebug --warning-mode=summary
+    ./gradlew clean assembleDebug
 
 if [ $? -eq 0 ]; then
     echo ""

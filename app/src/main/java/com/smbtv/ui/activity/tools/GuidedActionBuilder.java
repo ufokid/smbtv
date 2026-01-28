@@ -1,6 +1,6 @@
 package com.smbtv.ui.activity.tools;
 
-import android.support.v17.leanback.widget.GuidedAction;
+import androidx.leanback.widget.GuidedAction;
 import android.text.InputType;
 
 public class GuidedActionBuilder {

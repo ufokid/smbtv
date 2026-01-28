@@ -2,7 +2,7 @@ package com.smbtv.ui.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v17.leanback.app.GuidedStepFragment;
+import androidx.leanback.app.GuidedStepFragment;
 
 import com.smbtv.R;
 import com.smbtv.ui.activity.fragment.SettingsFragment;

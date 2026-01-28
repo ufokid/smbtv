@@ -2,12 +2,15 @@ package com.smbtv.ui.components;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.v17.leanback.widget.Presenter;
-import android.support.v4.content.ContextCompat;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.leanback.widget.Presenter;
+import androidx.core.content.ContextCompat;
+import androidx.cardview.widget.CardView;
 import android.util.Log;
 import android.view.ViewGroup;
 
-import com.hitherejoe.leanbackcards.IconCardView;
 import com.smbtv.R;
 
 
@@ -26,13 +29,39 @@ public class MenuItemPresenter extends Presenter {
         Log.d(TAG, "onCreateViewHolder");
 
         final Context context = parent.getContext();
-        final IconCardView iconCardView = new IconCardView(context, R.style.IconCardStyle);
+        
+        // Create a card view with icon and text
+        CardView cardView = new CardView(context);
+        cardView.setCardElevation(8);
+        cardView.setRadius(8);
+        
+        LinearLayout layout = new LinearLayout(context);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setLayoutParams(new ViewGroup.LayoutParams(IMAGE_WIDTH, IMAGE_HEIGHT));
+        
+        ImageView imageView = new ImageView(context);
+        imageView.setLayoutParams(new LinearLayout.LayoutParams(IMAGE_WIDTH, IMAGE_WIDTH));
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        
+        TextView titleView = new TextView(context);
+        titleView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        titleView.setTextSize(16);
+        titleView.setMaxLines(1);
+        
+        TextView detailView = new TextView(context);
+        detailView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        detailView.setTextSize(12);
+        detailView.setMaxLines(1);
+        
+        layout.addView(imageView);
+        layout.addView(titleView);
+        layout.addView(detailView);
+        cardView.addView(layout);
 
-        iconCardView.setFocusable(true);
-        iconCardView.setFocusableInTouchMode(true);
-        iconCardView.setMainImageDimensions(IMAGE_WIDTH, IMAGE_HEIGHT);
+        cardView.setFocusable(true);
+        cardView.setFocusableInTouchMode(true);
 
-        return new ViewHolder(iconCardView);
+        return new ViewHolder(cardView);
     }
 
     @Override
@@ -45,15 +74,21 @@ public class MenuItemPresenter extends Presenter {
             throw new IllegalArgumentException("item must be instance of MenuItem, not " + item.getClass().getName());
         }
 
-        IconCardView iconCardView = (IconCardView) viewHolder.view;
-
         MenuItem menuItem = (MenuItem) item;
-        iconCardView.setTitleText(menuItem.getTitle());
-        iconCardView.setDetailText(menuItem.getDetail());
+        
+        CardView cardView = (CardView) viewHolder.view;
+        LinearLayout layout = (LinearLayout) cardView.getChildAt(0);
+        
+        ImageView imageView = (ImageView) layout.getChildAt(0);
+        TextView titleView = (TextView) layout.getChildAt(1);
+        TextView detailView = (TextView) layout.getChildAt(2);
+        
+        titleView.setText(menuItem.getTitle());
+        detailView.setText(menuItem.getDetail());
 
-        final Context context = iconCardView.getContext();
+        final Context context = cardView.getContext();
         final Drawable icon = ContextCompat.getDrawable(context, menuItem.getIcon());
-        iconCardView.setIcon(icon);
+        imageView.setImageDrawable(icon);
     }
 
     @Override
